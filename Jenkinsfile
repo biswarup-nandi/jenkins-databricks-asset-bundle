@@ -1,7 +1,6 @@
+def DBCLIPATH = "/usr/local/bin"
 pipeline {
     agent any
-    
-    def DBCLIPATH     = "/usr/local/bin"
 
     parameters {
         string defaultValue: 'dev', description: 'Deployment Environment', name: 'env'
