@@ -7,11 +7,12 @@ pipeline {
     }
 
     stages {
+        def DBCLIPATH     = "/usr/local/bin"
         stage('DAB Validation') {
             steps {
                 script {
                     try {
-                        def command = "databricks bundle validate -t ${params.env} --profile main-ws"
+                        def command = "${DBCLIPATH}/databricks bundle validate -t ${params.env} --profile main-ws"
                         // Execute the command
                         sh(command)
                     } catch (Exception e) { 
@@ -24,7 +25,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        def command = "databricks bundle deploy -t ${params.env} --profile main-ws"
+                        def command = "${DBCLIPATH}/databricks bundle deploy -t ${params.env} --profile main-ws"
                         // Execute the command
                         sh(command)
                     } catch (Exception e) { 
@@ -37,7 +38,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        def command = "databricks bundle run -t ${params.env} ${params.job_name} --profile main-ws"
+                        def command = "${DBCLIPATH}/databricks bundle run -t ${params.env} ${params.job_name} --profile main-ws"
                         // Execute the command
                         sh(command)
                     } catch (Exception e) { 
