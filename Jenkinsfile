@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        def command = "${DBCLIPATH}/databricks bundle validate -t ${params.env} --profile main-ws"
+                        def command = "${DBCLIPATH}/databricks bundle validate -t ${params.env}"
                         // Execute the command
                         sh(command)
                     } catch (Exception e) { 
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        def command = "${DBCLIPATH}/databricks bundle deploy -t ${params.env} --profile main-ws"
+                        def command = "${DBCLIPATH}/databricks bundle deploy -t ${params.env}"
                         // Execute the command
                         sh(command)
                     } catch (Exception e) { 
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        def command = "${DBCLIPATH}/databricks bundle run -t ${params.env} ${params.job_name} --profile main-ws"
+                        def command = "${DBCLIPATH}/databricks bundle run -t ${params.env} ${params.job_name}"
                         // Execute the command
                         sh(command)
                     } catch (Exception e) { 
