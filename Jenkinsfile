@@ -1,5 +1,7 @@
 pipeline {
     agent any
+    
+    def DBCLIPATH     = "/usr/local/bin"
 
     parameters {
         string defaultValue: 'dev', description: 'Deployment Environment', name: 'env'
@@ -7,7 +9,6 @@ pipeline {
     }
 
     stages {
-        def DBCLIPATH     = "/usr/local/bin"
         stage('DAB Validation') {
             steps {
                 script {
