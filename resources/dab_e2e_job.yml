@@ -1,0 +1,40 @@
+# The main job for poc1.
+resources:
+  jobs:
+    dab_e2e_job:
+      name: dab_e2e_job
+
+      schedule:
+        # Run every day at 8:37 AM
+        quartz_cron_expression: '* * * ? * *'
+        timezone_id: Asia/Kolkata
+
+      email_notifications:
+        on_failure:
+          - biswarup.nandi@outlook.com
+
+      tasks:
+        - task_key: landing2bronze_notebook_task
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/LandingToBronze.ipynb
+
+        - task_key: bronze2silver_notebook_task
+          depends_on:
+            - task_key: landing2bronze_notebook_task
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/BronzeToSilver.ipynb
+        
+        - task_key: refresh_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.dab_e2e_dlt_pipeline.id}
+
+      job_clusters:
+        - job_cluster_key: job_cluster
+          new_cluster:
+            spark_version: 13.3.x-scala2.12
+            node_type_id: i3.xlarge
+            autoscale:
+                min_workers: 1
+                max_workers: 2

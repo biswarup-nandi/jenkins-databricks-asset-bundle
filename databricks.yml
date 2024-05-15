@@ -1,0 +1,42 @@
+# This is a Databricks asset bundle definition for dab_e2e.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: dab_e2e
+
+include:
+  - resources/*.yml
+
+targets:
+  # The 'dev' target, for development purposes. This target is the default.
+  dev:
+    # We use 'mode: development' to indicate this is a personal development copy:
+    # - Deployed resources get prefixed with '[dev my_user_name]'
+    # - Any job schedules and triggers are paused by default
+    # - The 'development' mode is used for Delta Live Tables pipelines
+    mode: development
+    default: true
+    workspace:
+      host: dbc-5154bde0-9094.cloud.databricks.com
+    unity_catalog:
+      enabled: true
+      metastore_id: metastore_aws_us_east_1
+
+  ## Optionally, there could be a 'staging' target here.
+  ## (See Databricks docs on CI/CD at https://docs.databricks.com/dev-tools/bundles/ci-cd.html.)
+  #
+  # staging:
+  #   workspace:
+  #     host: https://dbc-9475a0c9-5c2a.cloud.databricks.com
+
+  # The 'prod' target, used for production deployment.
+  # prod:
+  #   # We use 'mode: production' to indicate this is a production deployment.
+  #   # Doing so enables strict verification of the settings below.
+  #   mode: production
+  #   workspace:
+  #     host: https://dbc-9475a0c9-5c2a.cloud.databricks.com
+  #     # We always use /Users/0320cd8d-3040-4fb9-b832-6727ce564c2a for all resources to make sure we only have a single copy.
+  #     # If this path results in an error, please make sure you have a recent version of the CLI installed.
+  #     root_path: /Users/0320cd8d-3040-4fb9-b832-6727ce564c2a/.bundle/${bundle.name}/${bundle.target}
+  #   run_as:
+  #     service_principal_name: 0320cd8d-3040-4fb9-b832-6727ce564c2a

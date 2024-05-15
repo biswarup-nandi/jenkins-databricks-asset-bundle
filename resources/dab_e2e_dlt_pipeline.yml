@@ -1,0 +1,19 @@
+resources:
+  pipelines:
+    dab_e2e_dlt_pipeline:
+      name: dab_e2e_dlt_pipeline
+      catalog: databricks_main_ws
+      target: bronze
+      continuous: false
+      channel: "PREVIEW"
+      photon: false
+      edition: "ADVANCED"
+      libraries:
+        - notebook:
+            path: ../src/notebooks/DLT_Landing_Bronze.ipynb
+        - clusters:
+          - label: "default"
+            num_workers: 1
+
+      configuration:
+        bundle.sourcePath: /Workspace/${workspace.file_path}/src
