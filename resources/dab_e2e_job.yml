@@ -34,7 +34,7 @@ resources:
           job_cluster_key: job_cluster
           python_wheel_task:
             package_name: cartoon
-            entry_point: app
+            entry_point: main
           libraries:
             - whl: ../dist/*.whl
 

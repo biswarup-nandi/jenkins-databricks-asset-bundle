@@ -16,7 +16,7 @@ setup(
     package_dir={'': 'wheel'},
     entry_points={
         "packages": [
-            "main=cartoon.app:main"
+            "main=cartoon.main:main"
         ]
     },
     install_requires=[
