@@ -14,29 +14,34 @@ resources:
           - biswarup.nandi@outlook.com
 
       tasks:
-        - task_key: landing2bronze_notebook_task
+        - task_key: existing_notebook_task
           job_cluster_key: job_cluster
           notebook_task:
-            notebook_path: ../src/notebooks/LandingToBronze.ipynb
+            notebook_path: /Workspace/Users/dev.mousumi.ghanti@gmail.com/ExistingNB
+            
+        # - task_key: landing2bronze_notebook_task
+        #   job_cluster_key: job_cluster
+        #   notebook_task:
+        #     notebook_path: ../src/notebooks/LandingToBronze.ipynb
 
-        - task_key: bronze2silver_notebook_task
-          depends_on:
-            - task_key: landing2bronze_notebook_task
-          job_cluster_key: job_cluster
-          notebook_task:
-            notebook_path: ../src/notebooks/BronzeToSilver.ipynb
+        # - task_key: bronze2silver_notebook_task
+        #   depends_on:
+        #     - task_key: landing2bronze_notebook_task
+        #   job_cluster_key: job_cluster
+        #   notebook_task:
+        #     notebook_path: ../src/notebooks/BronzeToSilver.ipynb
         
-        - task_key: refresh_pipeline
-          pipeline_task:
-            pipeline_id: ${resources.pipelines.dab_e2e_dlt_pipeline.id}
+        # - task_key: refresh_pipeline
+        #   pipeline_task:
+        #     pipeline_id: ${resources.pipelines.dab_e2e_dlt_pipeline.id}
 
-        - task_key: wheel_task
-          job_cluster_key: job_cluster
-          python_wheel_task:
-            package_name: cartoon
-            entry_point: main
-          libraries:
-            - whl: ../dist/*.whl
+        # - task_key: wheel_task
+        #   job_cluster_key: job_cluster
+        #   python_wheel_task:
+        #     package_name: cartoon
+        #     entry_point: main
+        #   libraries:
+        #     - whl: ../dist/*.whl
 
       job_clusters:
         - job_cluster_key: job_cluster
