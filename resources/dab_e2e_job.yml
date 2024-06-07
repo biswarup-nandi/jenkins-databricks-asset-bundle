@@ -5,7 +5,6 @@ resources:
       name: dab_e2e_job
 
       schedule:
-        # Run every day at 8:37 AM
         quartz_cron_expression: '* * * ? * *'
         timezone_id: Asia/Kolkata
 
@@ -17,7 +16,7 @@ resources:
         - task_key: existing_notebook_task
           job_cluster_key: job_cluster
           notebook_task:
-            notebook_path: /Workspace/Users/dev.mousumi.ghanti@gmail.com/ExistingNB
+            notebook_path: /Workspace/Users/dev.biswa.nandi@gmail.com/ExistingNB
             
         - task_key: landing2bronze_notebook_task
           job_cluster_key: job_cluster
@@ -42,6 +41,10 @@ resources:
             entry_point: main
           libraries:
             - whl: ../dist/*.whl
+
+      parameters:
+        - name: custom_param
+          default: "testing value"
 
       job_clusters:
         - job_cluster_key: job_cluster
